@@ -1,2 +1,6 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+# Always normalize to LF
+* text=auto
+*.java text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
