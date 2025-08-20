@@ -3,28 +3,36 @@ package com.example.Split.XpenseSplit.controller;
 
 import com.example.Split.XpenseSplit.model.LoginRequest;
 import com.example.Split.XpenseSplit.model.User;
+import com.example.Split.XpenseSplit.repo.UserRepository;
 import com.example.Split.XpenseSplit.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
-
+    private final UserRepository userRepository;
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, UserRepository userRepository){
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
-    public List<User> getUsers(){
-        return userService.getUsers();
+    @GetMapping("/all")
+    public List<String> getAllUsernames() {
+        return userRepository.findAll()
+                .stream()
+                .map(User::getUsername)
+                .toList();
     }
 
     @GetMapping("/user/{id}")
@@ -56,15 +64,17 @@ public class UserController {
                     loginRequest.getPassword()
             );
 
-            if (user != null) {
-                session.setAttribute("user", user.getUsername());
-                return ResponseEntity.ok(user); // send full user object back
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-            }
+            session.setAttribute("user", user.getUsername());
+            return ResponseEntity.ok(user);
+
+        } catch (UsernameNotFoundException | BadCredentialsException ex) {
+            // wrong username OR password
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
         } catch (Exception e) {
+            // any other server-side error
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unknown error occurred");
         }
     }
+
 
 }

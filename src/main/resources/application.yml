@@ -4,5 +4,10 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://theproductivekid:root@pranav.k8xi6ba.mongodb.net/
+      uri: ${MONGODB_URI}
       database: XpenseSplit
+
+groq:
+  api:
+    key: ${GROQ_API_KEY}
+    url: ${GROQ_API_URL}
