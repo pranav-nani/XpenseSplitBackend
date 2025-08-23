@@ -54,7 +54,8 @@ public class ExpenseService {
                 }
             }
         }
-
+        youAreOwed = Math.round(youAreOwed);
+        youOwe = Math.round(youOwe);
         double totalBalance = youAreOwed - youOwe;
         return new BalanceDTO(totalBalance, youOwe, youAreOwed);
     }
