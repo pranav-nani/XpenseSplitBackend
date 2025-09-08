@@ -87,7 +87,7 @@ public class ExpenseService {
         message.put("content", prompt);
 
         requestBody.put("messages", Collections.singletonList(message));
-        requestBody.put("model", "llama3-8b-8192");
+        requestBody.put("model", "llama-3.1-8b-instant");
         requestBody.put("temperature", 0.5);
         requestBody.put("max_tokens", 10);
         requestBody.put("top_p", 1);
