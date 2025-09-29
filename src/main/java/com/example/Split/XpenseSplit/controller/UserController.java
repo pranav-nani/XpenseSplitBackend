@@ -1,6 +1,7 @@
 package com.example.Split.XpenseSplit.controller;
 
 
+import com.example.Split.XpenseSplit.dto.UserDTO;
 import com.example.Split.XpenseSplit.model.LoginRequest;
 import com.example.Split.XpenseSplit.model.User;
 import com.example.Split.XpenseSplit.repo.UserRepository;
@@ -32,6 +33,15 @@ public class UserController {
         return userRepository.findAll()
                 .stream()
                 .map(User::getUsername)
+                .toList();
+    }
+
+    @GetMapping("/upi/all")
+    public List<UserDTO> getAllUsernamesUpis() {
+        return userRepository.findAll()
+                .stream()
+                // Map each User entity to a UserDto object
+                .map(user -> new UserDTO(user.getUsername(), user.getUpId()))
                 .toList();
     }
 

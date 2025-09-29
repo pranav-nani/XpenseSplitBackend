@@ -44,6 +44,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/groups/create").permitAll()
                         .requestMatchers("/api/groups/{groupId}/addExpense").permitAll()
                         .requestMatchers("/api/groups/{groupId}").permitAll()
+                        .requestMatchers("/api/groups/{groupId}/settle").permitAll()
+                        .requestMatchers("/api/users/upi/all").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)

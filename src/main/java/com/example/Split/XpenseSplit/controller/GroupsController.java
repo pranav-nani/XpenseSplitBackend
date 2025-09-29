@@ -1,5 +1,6 @@
 package com.example.Split.XpenseSplit.controller;
 
+import com.example.Split.XpenseSplit.dto.SettlementDTO;
 import com.example.Split.XpenseSplit.model.Expense;
 import com.example.Split.XpenseSplit.model.GroupDetails;
 import com.example.Split.XpenseSplit.service.GroupService;
@@ -33,5 +34,13 @@ public class GroupsController {
     public ResponseEntity<GroupDetails> getGroupById(@PathVariable String groupId) {
         GroupDetails grpDetails = groupService.getGroupsByGroupId(groupId);
         return ResponseEntity.ok(grpDetails);
+    }
+    @PostMapping("/{groupId}/settle")
+    public ResponseEntity<GroupDetails> settleGroupExpense(
+            @PathVariable String groupId,
+            @RequestBody SettlementDTO settlementDto) {
+
+        GroupDetails updatedGroup = groupService.settleUp(groupId, settlementDto);
+        return ResponseEntity.ok(updatedGroup);
     }
 }

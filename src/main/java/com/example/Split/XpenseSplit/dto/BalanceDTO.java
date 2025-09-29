@@ -1,4 +1,4 @@
-package com.example.Split.XpenseSplit.service;
+package com.example.Split.XpenseSplit.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

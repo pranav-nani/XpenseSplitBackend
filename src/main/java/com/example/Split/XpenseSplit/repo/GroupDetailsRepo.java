@@ -44,4 +44,10 @@ public class GroupDetailsRepo {
         GroupDetails grpDetails = mongoOperations.findOne(query, GroupDetails.class);
         return Optional.ofNullable(grpDetails);
     }
+    public GroupDetails findByIdV1(String groupId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(groupId));
+        GroupDetails grpDetails = mongoOperations.findOne(query, GroupDetails.class);
+        return grpDetails;
+    }
 }

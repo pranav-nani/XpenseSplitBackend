@@ -1,5 +1,6 @@
 package com.example.Split.XpenseSplit.service;
 
+import com.example.Split.XpenseSplit.dto.BalanceDTO;
 import com.example.Split.XpenseSplit.model.Expense;
 import com.example.Split.XpenseSplit.repo.ExpenseRepo;
 import lombok.RequiredArgsConstructor;
