@@ -1,7 +1,7 @@
 package com.example.Split.XpenseSplit.controller;
 
 import com.example.Split.XpenseSplit.model.Expense;
-import com.example.Split.XpenseSplit.service.BalanceDTO;
+import com.example.Split.XpenseSplit.dto.BalanceDTO;
 import com.example.Split.XpenseSplit.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
