@@ -78,10 +78,8 @@ public class UserController {
             return ResponseEntity.ok(user);
 
         } catch (UsernameNotFoundException | BadCredentialsException ex) {
-            // wrong username OR password
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
         } catch (Exception e) {
-            // any other server-side error
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unknown error occurred");
         }
     }
