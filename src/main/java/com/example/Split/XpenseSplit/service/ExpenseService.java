@@ -39,16 +39,14 @@ public class ExpenseService {
             Map<String, Double> splits = exp.getSplitWith();
 
             if (paidBy.equals(username)) {
-                // You paid → others owe you their shares
                 for (Map.Entry<String, Double> entry : splits.entrySet()) {
                     String participant = entry.getKey();
                     Double amount = entry.getValue();
-                    if (!participant.equals(username)) { // Ignore your own name if present
+                    if (!participant.equals(username)) {
                         youAreOwed += amount;
                     }
                 }
             } else {
-                // Someone else paid → check your share
                 Double yourShare = splits.get(username);
                 if (yourShare != null) {
                     youOwe += yourShare;
