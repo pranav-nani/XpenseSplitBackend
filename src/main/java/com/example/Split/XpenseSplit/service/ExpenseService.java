@@ -118,8 +118,8 @@ public class ExpenseService {
 
     public List<Expense> getExpensesByUsername(String username) {
         List<Expense> expenses = expenseRepo.getExpenses(username);
-        if (expenses == null || expenses.isEmpty()) {
-            throw new IllegalArgumentException("No expenses found for user: " + username);
+        if (expenses == null) {
+            return Collections.emptyList();
         }
         return expenses;
     }
