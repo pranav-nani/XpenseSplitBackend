@@ -41,9 +41,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/all").permitAll()
                         .requestMatchers("/api/groups/user/**").permitAll()
                         .requestMatchers("/api/groups/create").permitAll()
-                        .requestMatchers("/api/groups/{groupId}/addExpense").permitAll()
-                        .requestMatchers("/api/groups/{groupId}").permitAll()
-                        .requestMatchers("/api/groups/{groupId}/settle").permitAll()
+                        .requestMatchers("/api/groups/*/addExpense").permitAll()
+                        .requestMatchers("/api/groups/*").permitAll()
+                        .requestMatchers("/api/groups/*/settle").permitAll()
                         .requestMatchers("/api/users/upi/all").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -64,7 +64,9 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of(
+                System.getenv("ALLOWED_ORIGIN") != null ? System.getenv("ALLOWED_ORIGIN") : "http://localhost:5173"
+        ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(List.of("*"));
